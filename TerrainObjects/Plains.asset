@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06200f8bfe59af84fa1bec9c64f17f58, type: 3}
+  m_Name: Plains
+  m_EditorClassIdentifier: 
+  regions:
+  - name: Sphere
+    minHeight: 0
+    maxHeight: 0.2
+    spawnFrequency: 0.01
+    prefab: {fileID: 4203444545602655812, guid: 2caa5acf24c92f349ac48ea0d1b45a4f, type: 3}
+  - name: Cube
+    minHeight: 0.2
+    maxHeight: 0.4
+    spawnFrequency: 0.01
+    prefab: {fileID: 8054361965331160460, guid: 44528506f2646174e822a406133d6a3c, type: 3}

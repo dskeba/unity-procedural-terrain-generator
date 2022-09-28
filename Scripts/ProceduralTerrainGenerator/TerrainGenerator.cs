@@ -1,86 +1,114 @@
-﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System.Linq;
 using UnityEditor;
 
-public class TerrainGenerator : MonoBehaviour {
+public class TerrainGenerator : MonoBehaviour
+{
+    public DrawMode drawMode;
+    public int mapChunkSize;
+    public Renderer textureRender;
+    public GameObject mesh;
+    public TerrainData terrainData;
+    public bool runTerrainObjectSpawner = false;
 
-	public enum DrawMode {NoiseMap, ColourMap, Mesh};
-	public DrawMode drawMode;
-
-	public int mapChunkSize;
-
-	public TerrainData terrainData;
-
-	public Renderer textureRender; 
-	public MeshFilter meshFilter;
-	public MeshRenderer meshRenderer;
-	public MeshCollider meshCollider;
+    private MeshFilter meshFilter;
+    private MeshRenderer meshRenderer;
+    private MeshCollider meshCollider;
 
     private void Start()
     {
-		GenerateMap();
+        meshFilter = mesh.GetComponent<MeshFilter>();
+        meshRenderer = mesh.GetComponent<MeshRenderer>();
+        meshCollider = mesh.GetComponent<MeshCollider>();
+        Generate();
     }
 
-    public void GenerateMap() {
-		float[,] noiseMap = NoiseGenerator.GenerateNoiseMap (mapChunkSize, mapChunkSize, terrainData.seed, terrainData.noiseScale, terrainData.octaves, terrainData.persistance, terrainData.lacunarity, terrainData.offset);
+    public void GenerateLandMass()
+    {
+        LandMassGenerator.Generate(drawMode, mapChunkSize, terrainData, textureRender, meshFilter, meshRenderer, meshCollider);
+    }
 
-		Color[] colourMap = new Color[mapChunkSize * mapChunkSize];
-		for (int y = 0; y < mapChunkSize; y++) {
-			for (int x = 0; x < mapChunkSize; x++) {
-				float currentHeight = noiseMap [x, y];
-				for (int i = 0; i < terrainData.regions.Length; i++) {
-					if (currentHeight <= terrainData.regions[i].height) {
-						colourMap [y * mapChunkSize + x] = terrainData.regions[i].colour;
-						break;
-					}
-				}
-			}
-		}
+    public void Generate()
+    {
+        Debug.Log("[TerrainGenerator] Begin");
+        GenerateLandMass();
 
-		if (drawMode == DrawMode.NoiseMap) {
-			DrawTexture(TextureGenerator.TextureFromHeightMap (noiseMap));
-		} else if (drawMode == DrawMode.ColourMap) {
-			DrawTexture(TextureGenerator.TextureFromColourMap (colourMap, mapChunkSize, mapChunkSize));
-		} else if (drawMode == DrawMode.Mesh) {
-			DrawMesh(MeshGenerator.GenerateTerrainMesh (noiseMap, terrainData.meshHeightMultiplier, terrainData.meshHeightCurve, terrainData.useFlatShading), TextureGenerator.TextureFromColourMap (colourMap, mapChunkSize, mapChunkSize));
-		}
-	}
+        if (runTerrainObjectSpawner)
+        {
+            Debug.Log("[TerrainGenerator] Spawn Flora");
+            SpawnFlora();
+        }
+        Debug.Log("[TerrainGenerator] Complete");
+    }
 
-	public void DrawTexture(Texture2D texture)
-	{
-		textureRender.sharedMaterial.mainTexture = texture;
-		textureRender.transform.localScale = new Vector3(texture.width, 1, texture.height);
-	}
+    public void SpawnFlora()
+    {
+        Vector3[] vertices = meshFilter.sharedMesh.vertices;
 
-	public void DrawMesh(MeshData meshData, Texture2D texture)
-	{
-		Mesh mesh = meshData.CreateMesh();
-		meshFilter.sharedMesh = mesh;
-		meshCollider.sharedMesh = mesh;
-		meshRenderer.sharedMaterial.mainTexture = texture;
-	}
+        if (vertices.Length < 1) return;
+        if (terrainData.floraRegions.Length < 1) return;
+
+        int totalObjectSpawned = 0;
+
+        System.Random random = new System.Random(terrainData.seed);
+
+        float maxY = vertices.OrderByDescending(vertex => vertex.y).First().y;
+
+        Debug.Log("[TerrainGenerator] Total Vertices in Mesh: " + vertices.Length);
+
+        for (int i = 0; i < vertices.Length; i++)
+        {
+            for (int j = 0; j < terrainData.floraRegions.Length; j++)
+            {
+                float vertexHeightScale = vertices[i].y / maxY;
+                if (vertexHeightScale > terrainData.floraRegions[j].minHeight &&
+                    vertexHeightScale <= terrainData.floraRegions[j].maxHeight)
+                {
+                    float randomValue = (float)random.NextDouble();
+
+                    if (terrainData.floraRegions[j].spawnFrequency > randomValue)
+                    {
+                        Instantiate(terrainData.floraRegions[j].prefab, vertices[i], Quaternion.identity);
+                        totalObjectSpawned++;
+                    }
+                }
+            }
+        }
+
+        Debug.Log("[TerrainGenerator] Total Objects Spawned = " + totalObjectSpawned);
+
+        Debug.Log("[TerrainGenerator] Tallest vertex = " + maxY);
+    }
 }
 
 [System.Serializable]
-public struct TerrainType {
-	public string name;
-	public float height;
-	public Color colour;
+public struct TerrainFloraType
+{
+    public string name;
+    [Range(0, 1)]
+    public float minHeight;
+    [Range(0, 1)]
+    public float maxHeight;
+    [Range(0, 1)]
+    public float spawnFrequency;
+    public GameObject prefab;
 }
 
-[CustomEditor(typeof(TerrainGenerator))]
+/*[CustomEditor(typeof(TerrainGenerator))]
 public class TerrainGeneratorEditor : Editor
 {
 
-	public override void OnInspectorGUI()
-	{
-		TerrainGenerator terrainGenerator = (TerrainGenerator)target;
+    public override void OnInspectorGUI()
+    {
+        TerrainGenerator terrainGenerator = (TerrainGenerator)target;
 
-		DrawDefaultInspector();
+        DrawDefaultInspector();
 
-		if (GUILayout.Button("Generate"))
-		{
-			terrainGenerator.GenerateMap();
-		}
-	}
-}
+        if (GUILayout.Button("Preview Land Mass"))
+        {
+            terrainGenerator.GenerateLandMass();
+        }
+    }
+}*/

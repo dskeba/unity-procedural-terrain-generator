@@ -8,7 +8,6 @@ public class TerrainData : ScriptableObject
     public bool useFlatShading;
     public float meshHeightMultiplier;
     public AnimationCurve meshHeightCurve;
-    public TerrainType[] regions;
 
 	public float noiseScale;
 
@@ -19,6 +18,10 @@ public class TerrainData : ScriptableObject
 
 	public int seed;
 	public Vector2 offset;
+
+	public TerrainType[] colorRegions;
+
+	public TerrainFloraType[] floraRegions;
 
 	void OnValidate()
 	{
