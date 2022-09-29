@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Plains
   m_EditorClassIdentifier: 
   chunkSize: 105
-  useFlatShading: 0
+  useFlatShading: 1
   meshHeightMultiplier: 15
   meshHeightCurve:
     serializedVersion: 2
@@ -39,14 +39,14 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  noiseScale: 25.28
-  octaves: 6
+  noiseScale: 25
+  octaves: 5
   persistance: 0.5
   lacunarity: 2
-  seed: 1
+  seed: 0
   offset: {x: 0, y: 0}
   enableBlur: 1
-  blurRadius: 2
+  blurRadius: 10
   blurIterations: 1
   colorRegions:
   - name: 

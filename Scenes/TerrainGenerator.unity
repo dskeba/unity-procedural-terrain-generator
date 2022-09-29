@@ -251,7 +251,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   drawMode: 2
-  mapChunkSize: 255
   textureRender: {fileID: 1711656485}
   mesh: {fileID: 522957207}
   terrainData: {fileID: 11400000, guid: 56b0b2b20444f9e458283955052cc3f9, type: 2}
