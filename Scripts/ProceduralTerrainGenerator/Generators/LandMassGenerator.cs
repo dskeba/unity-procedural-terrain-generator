@@ -7,6 +7,7 @@ public enum DrawMode { NoiseMap, ColourMap, Mesh };
 public static class LandMassGenerator{
 
     public static void Generate(DrawMode drawMode, int mapChunkSize, TerrainData terrainData, Renderer textureRender, MeshFilter meshFilter, MeshRenderer meshRenderer, MeshCollider meshCollider) {
+
 		float[,] noiseMap = NoiseGenerator.GenerateNoiseMap (mapChunkSize, mapChunkSize, terrainData.seed, terrainData.noiseScale, terrainData.octaves, terrainData.persistance, terrainData.lacunarity, terrainData.offset);
 
 		Color[] colourMap = new Color[mapChunkSize * mapChunkSize];
@@ -23,11 +24,11 @@ public static class LandMassGenerator{
 		}
 
 		if (drawMode == DrawMode.NoiseMap) {
-			DrawTexture(TextureGenerator.TextureFromHeightMap (noiseMap), textureRender);
+			DrawTexture(TextureGenerator.TextureFromHeightMap(noiseMap, terrainData), textureRender);
 		} else if (drawMode == DrawMode.ColourMap) {
-			DrawTexture(TextureGenerator.TextureFromColourMap (colourMap, mapChunkSize, mapChunkSize), textureRender);
+			DrawTexture(TextureGenerator.TextureFromColorMap(colourMap, mapChunkSize, mapChunkSize, terrainData), textureRender);
 		} else if (drawMode == DrawMode.Mesh) {
-			DrawMesh(MeshGenerator.GenerateTerrainMesh (noiseMap, terrainData.meshHeightMultiplier, terrainData.meshHeightCurve, terrainData.useFlatShading), TextureGenerator.TextureFromColourMap (colourMap, mapChunkSize, mapChunkSize), meshFilter, meshCollider, meshRenderer);
+			DrawMesh(MeshGenerator.GenerateTerrainMesh (noiseMap, terrainData.meshHeightMultiplier, terrainData.meshHeightCurve, terrainData.useFlatShading), TextureGenerator.TextureFromColorMap(colourMap, mapChunkSize, mapChunkSize, terrainData), meshFilter, meshCollider, meshRenderer);
 		}
 	}
 

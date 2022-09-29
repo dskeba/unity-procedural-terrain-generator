@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e42ea4ddeba9528428eedbcc3550ab84, type: 3}
   m_Name: Plains
   m_EditorClassIdentifier: 
-  useFlatShading: 1
+  chunkSize: 105
+  useFlatShading: 0
   meshHeightMultiplier: 15
   meshHeightCurve:
     serializedVersion: 2
@@ -38,6 +39,15 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  noiseScale: 25.28
+  octaves: 6
+  persistance: 0.5
+  lacunarity: 2
+  seed: 1
+  offset: {x: 0, y: 0}
+  enableBlur: 1
+  blurRadius: 2
+  blurIterations: 1
   colorRegions:
   - name: 
     height: 0.2
@@ -54,12 +64,6 @@ MonoBehaviour:
   - name: 
     height: 1
     colour: {r: 1, g: 1, b: 1, a: 0}
-  noiseScale: 25.28
-  octaves: 6
-  persistance: 0.5
-  lacunarity: 2
-  seed: 1
-  offset: {x: 0, y: 0}
   floraRegions:
   - name: Cubes
     minHeight: 0.1

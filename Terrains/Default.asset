@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e42ea4ddeba9528428eedbcc3550ab84, type: 3}
   m_Name: Default
   m_EditorClassIdentifier: 
+  chunkSize: 254
   useFlatShading: 1
   meshHeightMultiplier: 15
   meshHeightCurve:
@@ -27,32 +28,14 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.17743632
-      value: 0.10971558
-      inSlope: 0.98821425
-      outSlope: 0.98821425
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.44731566
-      value: 0.05461465
+      time: 1.0705609
+      value: 0.77566874
       inSlope: 0.26796013
       outSlope: 0.26796013
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -62,6 +45,9 @@ MonoBehaviour:
   lacunarity: 2
   seed: 0
   offset: {x: 0, y: 0}
+  enableBlur: 1
+  blurRadius: 2
+  blurIterations: 1
   colorRegions:
   - name: 
     height: 0.2
