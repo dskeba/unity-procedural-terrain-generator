@@ -14,15 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chunkSize: 105
   useFlatShading: 1
-  meshHeightMultiplier: 15
+  meshHeightMultiplier: 10
   meshHeightCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0
-      outSlope: 0
+      inSlope: 2
+      outSlope: 2
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
@@ -30,8 +30,8 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 2
-      outSlope: 2
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
@@ -46,24 +46,24 @@ MonoBehaviour:
   seed: 0
   offset: {x: 0, y: 0}
   enableBlur: 1
-  blurRadius: 10
+  blurRadius: 5
   blurIterations: 1
   colorRegions:
   - name: 
     height: 0.2
-    colour: {r: 0, g: 0.8773585, b: 0.5352438, a: 0}
+    color: {r: 0.08926833, g: 1, b: 0, a: 0}
   - name: 
     height: 0.4
-    colour: {r: 0.11968428, g: 0.5188679, b: 0, a: 0}
+    color: {r: 0.75114155, g: 1, b: 0, a: 0}
   - name: 
     height: 0.5
-    colour: {r: 0.48292637, g: 0.6037736, b: 0, a: 0}
+    color: {r: 1, g: 0.6489396, b: 0, a: 0}
   - name: 
     height: 0.6
-    colour: {r: 0.15069833, g: 0.18867922, b: 0, a: 0}
+    color: {r: 0.24528301, g: 0.16803586, b: 0, a: 0}
   - name: 
     height: 1
-    colour: {r: 1, g: 1, b: 1, a: 0}
+    color: {r: 0.7531077, g: 0.9528302, b: 0, a: 0}
   floraRegions:
   - name: Cubes
     minHeight: 0.1

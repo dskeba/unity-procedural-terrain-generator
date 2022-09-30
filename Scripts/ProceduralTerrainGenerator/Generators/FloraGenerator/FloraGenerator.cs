@@ -32,7 +32,8 @@ public static class FloraGenerator
 
                     if (terrainData.floraRegions[j].spawnFrequency > randomValue)
                     {
-                        Object.Instantiate(terrainData.floraRegions[j].prefab, vertices[i], Quaternion.identity);
+                        GameObject go = Object.Instantiate(terrainData.floraRegions[j].prefab, vertices[i], Quaternion.identity);
+                        go.transform.parent = meshFilter.transform;
                         totalObjectSpawned++;
                     }
                 }

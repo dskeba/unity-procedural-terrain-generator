@@ -7,27 +7,53 @@ using UnityEditor;
 public class TerrainGenerator : MonoBehaviour
 {
     public DrawMode drawMode;
-    public Renderer textureRender;
-    public GameObject mesh;
     public TerrainData terrainData;
-    public bool runTerrainObjectSpawner = false;
+    public bool runFloraGenerator = true;
+    public bool generateOnStart = true;
 
+    private GameObject meshObject;
     private MeshFilter meshFilter;
     private MeshRenderer meshRenderer;
     private MeshCollider meshCollider;
 
+    private Renderer textureRenderer;
+
     private void Start()
     {
-        GetComponents();
+        if (!generateOnStart) return;
+
         ValidateTerrainData();
+
+        if (drawMode == DrawMode.Mesh)
+        {
+            CreateMesh("TerrainMesh");
+        } 
+        else if (drawMode == DrawMode.NoiseMap)
+        {
+            CreateTextureRenderer("TerrainNoiseMap");
+        }
+        else if (drawMode == DrawMode.ColorMap)
+        {
+            CreateTextureRenderer("TerrainColorMap");
+        }
+
         Generate();
     }
 
-    private void GetComponents()
+    private void CreateMesh(string gameObjectName)
     {
-        meshFilter = mesh.GetComponent<MeshFilter>();
-        meshRenderer = mesh.GetComponent<MeshRenderer>();
-        meshCollider = mesh.GetComponent<MeshCollider>();
+        meshObject = new GameObject(gameObjectName);
+        meshFilter = meshObject.AddComponent<MeshFilter>();
+        meshRenderer = meshObject.AddComponent<MeshRenderer>();
+        meshRenderer.material = new Material(Shader.Find("Standard"));
+        meshCollider = meshObject.AddComponent<MeshCollider>();
+    }
+
+    private void CreateTextureRenderer(string gameObjectName)
+    {
+        GameObject go = new GameObject(gameObjectName);
+        textureRenderer = go.AddComponent<MeshRenderer>();
+        textureRenderer.material = new Material(Shader.Find("Unlit/Texture"));
     }
 
     private void ValidateTerrainData()
@@ -42,10 +68,11 @@ public class TerrainGenerator : MonoBehaviour
 
     public void Generate()
     {
-        Debug.Log("[TerrainGenerator] Begin");
-        LandMassGenerator.Generate(drawMode, terrainData.chunkSize, terrainData, textureRender, meshFilter, meshRenderer, meshCollider);
 
-        if (runTerrainObjectSpawner)
+        Debug.Log("[TerrainGenerator] Begin");
+        LandMassGenerator.Generate(drawMode, terrainData.chunkSize, terrainData, textureRenderer, meshFilter, meshRenderer, meshCollider);
+
+        if (runFloraGenerator && drawMode == DrawMode.Mesh)
         {
             Debug.Log("[TerrainGenerator] Spawn Flora");
             FloraGenerator.GenerateFlora(meshFilter, terrainData);

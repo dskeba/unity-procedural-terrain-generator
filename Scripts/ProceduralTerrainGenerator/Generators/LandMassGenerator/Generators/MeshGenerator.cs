@@ -73,7 +73,7 @@ public class MeshData {
     }
 
 	public Mesh CreateMesh() {
-		Mesh mesh = new Mesh ();
+		Mesh mesh = new Mesh();
 
 		if (useFlatShading)
         {

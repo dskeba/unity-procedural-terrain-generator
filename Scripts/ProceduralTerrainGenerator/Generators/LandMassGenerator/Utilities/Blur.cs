@@ -8,7 +8,6 @@ using System.Collections;
 
 public static class Blur
 {
-
     private static float avgR = 0;
     private static float avgG = 0;
     private static float avgB = 0;
@@ -32,8 +31,6 @@ public static class Blur
         return tex;
     }
 
-
-
     public static Texture2D BlurImage(Texture2D image, int blurSize, bool horizontal)
     {
 
@@ -49,25 +46,17 @@ public static class Blur
                 for (xx = 0; xx < _W; xx++)
                 {
                     ResetPixel();
-
                     //Right side of pixel
-
                     for (x = xx; (x < xx + blurSize && x < _W); x++)
                     {
                         AddPixel(image.GetPixel(x, yy));
                     }
-
                     //Left side of pixel
-
                     for (x = xx; (x > xx - blurSize && x > 0); x--)
                     {
                         AddPixel(image.GetPixel(x, yy));
-
                     }
-
-
                     CalcPixel();
-
                     for (x = xx; x < xx + blurSize && x < _W; x++)
                     {
                         blurred.SetPixel(x, yy, new Color(avgR, avgG, avgB, 1.0f));
@@ -76,7 +65,6 @@ public static class Blur
                 }
             }
         }
-
         else
         {
             for (xx = 0; xx < _W; xx++)
@@ -86,13 +74,11 @@ public static class Blur
                     ResetPixel();
 
                     //Over pixel
-
                     for (y = yy; (y < yy + blurSize && y < _H); y++)
                     {
                         AddPixel(image.GetPixel(xx, y));
                     }
                     //Under pixel
-
                     for (y = yy; (y > yy - blurSize && y > 0); y--)
                     {
                         AddPixel(image.GetPixel(xx, y));
@@ -110,6 +96,7 @@ public static class Blur
         blurred.Apply();
         return blurred;
     }
+
     public static void AddPixel(Color pixel)
     {
         avgR += pixel.r;
