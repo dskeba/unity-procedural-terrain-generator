@@ -9,8 +9,8 @@ public static class FloraGenerator
 	{
         Vector3[] vertices = meshFilter.sharedMesh.vertices;
 
-        if (vertices.Length < 1) return;
-        if (terrainData.floraRegions.Length < 1) return;
+        if (vertices == null || vertices.Length < 1) return;
+        if (terrainData.floraRegions == null || terrainData.floraRegions.Length < 1) return;
 
         int totalObjectSpawned = 0;
 

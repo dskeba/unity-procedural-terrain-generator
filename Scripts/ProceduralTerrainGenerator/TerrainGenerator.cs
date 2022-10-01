@@ -21,13 +21,17 @@ public class TerrainGenerator : MonoBehaviour
     private void Start()
     {
         if (!generateOnStart) return;
+        Generate();
+    }
 
+    public GameObject Generate()
+    {
         ValidateTerrainData();
 
         if (drawMode == DrawMode.Mesh)
         {
             CreateMesh("TerrainMesh");
-        } 
+        }
         else if (drawMode == DrawMode.NoiseMap)
         {
             CreateTextureRenderer("TerrainNoiseMap");
@@ -37,7 +41,9 @@ public class TerrainGenerator : MonoBehaviour
             CreateTextureRenderer("TerrainColorMap");
         }
 
-        Generate();
+        GenerateTerrain();
+
+        return meshObject;
     }
 
     private void CreateMesh(string gameObjectName)
@@ -66,7 +72,7 @@ public class TerrainGenerator : MonoBehaviour
         }
     }
 
-    public void Generate()
+    private void GenerateTerrain()
     {
 
         Debug.Log("[TerrainGenerator] Begin");
