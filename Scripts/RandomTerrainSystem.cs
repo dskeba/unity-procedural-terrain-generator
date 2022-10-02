@@ -6,9 +6,16 @@ public class RandomTerrainSystem : MonoBehaviour
 {
     public TerrainGenerator terrainGenerator;
 
+    public int seed = 0;
+
     private GameObject terrain;
 
-    private System.Random random = new System.Random(2);
+    private System.Random random;
+
+    private void Awake()
+    {
+        random = new System.Random(seed);
+    }
 
     void Start()
     {
@@ -30,9 +37,9 @@ public class RandomTerrainSystem : MonoBehaviour
     {
         TerrainData data = ScriptableObject.CreateInstance<TerrainData>();
 
-        data.chunkSize = random.Next(55, 105);
+        data.chunkSize = 105; // random.Next(55, 105);
 
-        data.useFlatShading = (random.Next(0, 1) == 0);
+        data.useFlatShading = true; // (random.NextDouble() >= 0.5);
         data.meshHeightMultiplier = random.Next(5, 15);
         AnimationCurve curve = new AnimationCurve();
         curve.AddKey(0, 0);
@@ -51,7 +58,7 @@ public class RandomTerrainSystem : MonoBehaviour
         Debug.Log("persistance = " + data.persistance);
 
         data.enableBlur = true;
-        data.blurRadius = random.Next(2, 3);
+        data.blurRadius = random.Next(2, 4);
         data.blurIterations = 1; // random.Next(1, 2);
 
         data.colorRegions = new TerrainType[10];

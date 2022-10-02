@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Default
   m_EditorClassIdentifier: 
   chunkSize: 105
-  useFlatShading: 0
+  useFlatShading: 1
   meshHeightMultiplier: 15
   meshHeightCurve:
     serializedVersion: 2
@@ -43,7 +43,7 @@ MonoBehaviour:
   octaves: 5
   persistance: 0.5
   lacunarity: 2
-  seed: 0
+  seed: 5
   offset: {x: 0, y: 0}
   enableBlur: 1
   blurRadius: 3
@@ -61,14 +61,17 @@ MonoBehaviour:
   - name: 
     height: 1
     color: {r: 1, g: 1, b: 1, a: 0}
+  floraSeed: 0
   floraRegions:
-  - name: Cubes
-    minHeight: 0.1
-    maxHeight: 0.3
-    spawnFrequency: 0.01
-    prefab: {fileID: 8054361965331160460, guid: 44528506f2646174e822a406133d6a3c, type: 3}
-  - name: Spheres
-    minHeight: 0.4
-    maxHeight: 0.6
-    spawnFrequency: 0.01
-    prefab: {fileID: 4203444545602655812, guid: 2caa5acf24c92f349ac48ea0d1b45a4f, type: 3}
+  - name: Trees
+    minHeight: 0
+    maxHeight: 1
+    spawnFrequency: 0.001
+    prefab: {fileID: 8066406175558291467, guid: f196dc770a1a2f84cb00a5eb66dc6e48, type: 3}
+    randomizeMaterialColor: 1
+  - name: Rocks
+    minHeight: 0
+    maxHeight: 1
+    spawnFrequency: 0.0005
+    prefab: {fileID: 1727792575874126701, guid: f9bb06c4e3273134db65c0d10f5a648d, type: 3}
+    randomizeMaterialColor: 1

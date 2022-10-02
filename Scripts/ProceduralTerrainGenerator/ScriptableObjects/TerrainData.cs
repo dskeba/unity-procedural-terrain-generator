@@ -32,6 +32,7 @@ public class TerrainData : ScriptableObject
 	public TerrainType[] colorRegions;
 
 	[Header("Flora")]
+	public int floraSeed;
 	public TerrainFloraType[] floraRegions;
 
 	void OnValidate()
