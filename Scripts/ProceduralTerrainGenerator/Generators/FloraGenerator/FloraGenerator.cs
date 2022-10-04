@@ -25,10 +25,11 @@ public static class FloraGenerator
         // Loop over all vertices in the terrain mesh
         for (int i = 0; i < vertices.Length; i++)
         {
+            float vertexHeightScale = vertices[i].y / maxY;
+
             // Loop over all flora regions defined in the terrain data
             for (int j = 0; j < terrainData.floraRegions.Length; j++)
             {
-                float vertexHeightScale = vertices[i].y / maxY;
 
                 // Only attempt to add flora to vertices where height/y value
                 // is within flora region threshhold
@@ -37,22 +38,27 @@ public static class FloraGenerator
                 {
                     // Random chance to add flora
                     float randomValue = (float)random.NextDouble();
-
                     if (terrainData.floraRegions[j].spawnFrequency > randomValue)
                     {
-                        // Create the new flora object
-                        GameObject go = Object.Instantiate(terrainData.floraRegions[j].prefab, vertices[i], Quaternion.identity);
+                        // Choose random prefab to use for flora region
+                        int prefabIndex = random.Next(0, terrainData.floraRegions[j].prefabs.Length);
 
-                        // Position flora at current vertex
+                        // Create the new flora object
+                        GameObject go = Object.Instantiate(terrainData.floraRegions[j].prefabs[prefabIndex], vertices[i], Quaternion.Euler(new Vector3(0f, random.Next(0, 360))));
+
+                        // Make flora object child of terrain
                         go.transform.parent = meshFilter.transform;
 
-                        // Check if randomize material color is on for object
+                        // Check if randomize scale is on
+                        go.transform.localScale = new Vector3(random.Next(1, 3), random.Next(1, 3), random.Next(1, 3));
+
+                        // Check if randomize material color is on
                         if (terrainData.floraRegions[j].randomizeMaterialColor)
                         {
                             // Modify color of all materials on all renderers
                             // Passing in flora region index as seed ensures
                             // all regions have different colors
-                            ChangeColorOfAllChildren(go, j);
+                            ChangeColorOfAllChildren(go, terrainData.floraSeed + j);
                         }
 
                         totalObjectSpawned++;
@@ -94,6 +100,7 @@ public struct TerrainFloraType
     public float maxHeight;
     [Range(0, 1)]
     public float spawnFrequency;
-    public GameObject prefab;
+    public GameObject[] prefabs;
+    public bool randomizeScale;
     public bool randomizeMaterialColor;
 }

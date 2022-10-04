@@ -6,11 +6,11 @@ public static class NoiseGenerator {
 	public static float[,] GenerateNoiseMap(int mapWidth, int mapHeight, int seed, float scale, int octaves, float persistance, float lacunarity, Vector2 offset) {
 		float[,] noiseMap = new float[mapWidth,mapHeight];
 
-		System.Random prng = new System.Random (seed);
+		System.Random random = new System.Random (seed);
 		Vector2[] octaveOffsets = new Vector2[octaves];
 		for (int i = 0; i < octaves; i++) {
-			float offsetX = prng.Next (-100000, 100000) + offset.x;
-			float offsetY = prng.Next (-100000, 100000) + offset.y;
+			float offsetX = random.Next (-100000, 100000) + offset.x;
+			float offsetY = random.Next (-100000, 100000) + offset.y;
 			octaveOffsets [i] = new Vector2 (offsetX, offsetY);
 		}
 

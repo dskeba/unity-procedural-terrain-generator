@@ -48,6 +48,7 @@ public class TerrainGenerator : MonoBehaviour
 
     private void CreateMesh(string gameObjectName)
     {
+        // Create a mesh filter, renderer, and collider for drawing terrain
         meshObject = new GameObject(gameObjectName);
         meshFilter = meshObject.AddComponent<MeshFilter>();
         meshRenderer = meshObject.AddComponent<MeshRenderer>();
@@ -57,6 +58,7 @@ public class TerrainGenerator : MonoBehaviour
 
     private void CreateTextureRenderer(string gameObjectName)
     {
+        // Create a mesh renderer with default shader to drawing texture
         GameObject go = new GameObject(gameObjectName);
         textureRenderer = go.AddComponent<MeshRenderer>();
         textureRenderer.material = new Material(Shader.Find("Unlit/Texture"));
@@ -64,6 +66,7 @@ public class TerrainGenerator : MonoBehaviour
 
     private void ValidateTerrainData()
     {
+        // Flat shading only supports chunkSize <= 105
         if (terrainData.useFlatShading &&
             terrainData.chunkSize > 105)
         {
@@ -78,6 +81,8 @@ public class TerrainGenerator : MonoBehaviour
         Debug.Log("[TerrainGenerator] Begin");
         LandMassGenerator.Generate(drawMode, terrainData.chunkSize, terrainData, textureRenderer, meshFilter, meshRenderer, meshCollider);
 
+        // Only run flora generator if its enabled
+        // and we are drawing a mesh
         if (runFloraGenerator && drawMode == DrawMode.Mesh)
         {
             Debug.Log("[TerrainGenerator] Spawn Flora");
