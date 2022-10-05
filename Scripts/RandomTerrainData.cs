@@ -1,40 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class RandomTerrainSystem : MonoBehaviour
+public static class RandomTerrainData
 {
-    public TerrainGenerator terrainGenerator;
 
-    public int seed = 0;
-
-    private GameObject terrain;
-
-    private System.Random random;
-
-    private void Awake()
+    public static TerrainData Generate(int seed)
     {
-        random = new System.Random(seed);
-    }
+        System.Random random = new System.Random(seed);
 
-    void Start()
-    {
-        StartCoroutine(GenerateAfterSeconds(10f));
-    }
-
-    private IEnumerator GenerateAfterSeconds(float seconds)
-    {
-        for (int i = 0; i < 1000; i++)
-        {
-            Object.Destroy(terrain);
-            terrainGenerator.terrainData = RandomTerrainData();
-            terrain = terrainGenerator.Generate();
-            yield return new WaitForSeconds(seconds);
-        }
-    }
-
-    private TerrainData RandomTerrainData()
-    {
         TerrainData data = ScriptableObject.CreateInstance<TerrainData>();
 
         data.chunkSize = 105;
@@ -53,9 +25,6 @@ public class RandomTerrainSystem : MonoBehaviour
         data.lacunarity = 2;
         data.seed = 0;
         data.offset = new Vector2(random.Next(0, 100), random.Next(0, 100));
-
-        Debug.Log("noiseScale = " + data.noiseScale);
-        Debug.Log("persistance = " + data.persistance);
 
         data.enableBlur = true;
         data.blurRadius = random.Next(2, 4);
