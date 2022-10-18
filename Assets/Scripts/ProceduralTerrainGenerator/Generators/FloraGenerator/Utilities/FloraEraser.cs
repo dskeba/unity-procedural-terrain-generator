@@ -27,11 +27,9 @@ public class FloraEraser : MonoBehaviour
 
     public void DestroyOverlappingFlora()
     {
-        Debug.Log("Attempting to destroy: " + LayerMaskToDestroy.value);
         Collider[] hitColliders = Physics.OverlapBox(gameObject.transform.position, transform.localScale / 2, Quaternion.identity, LayerMaskToDestroy);
         for (int i = 0; i < hitColliders.Length; i++)
         {
-            Debug.Log("Destroying: " + hitColliders[i].gameObject.name);
             Object.Destroy(hitColliders[i].gameObject);
         }
     }
