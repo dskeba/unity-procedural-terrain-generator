@@ -33,12 +33,12 @@ public static class MeshGenerator {
 }
 
 public class MeshData {
+
 	public Vector3[] vertices;
 	public int[] triangles;
 	public Vector2[] uvs;
 
 	int triangleIndex;
-
 	bool useFlatShading;
 
 	public MeshData(int meshWidth, int meshHeight, bool useFlatShading) {
