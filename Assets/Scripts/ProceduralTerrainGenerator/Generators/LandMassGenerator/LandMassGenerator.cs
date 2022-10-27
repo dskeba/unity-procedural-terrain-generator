@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
-using UnityEditor;
 
 public enum DrawMode { NoiseMap, ColorMap, Mesh };
 
