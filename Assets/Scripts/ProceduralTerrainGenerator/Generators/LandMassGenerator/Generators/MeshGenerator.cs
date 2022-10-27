@@ -49,9 +49,9 @@ public class MeshData {
 	}
 
 	public void AddTriangle(int a, int b, int c) {
-		triangles [triangleIndex] = a;
-		triangles [triangleIndex + 1] = b;
-		triangles [triangleIndex + 2] = c;
+		triangles[triangleIndex] = a;
+		triangles[triangleIndex + 1] = b;
+		triangles[triangleIndex + 2] = c;
 		triangleIndex += 3;
 	}
 
@@ -59,6 +59,9 @@ public class MeshData {
     {
 		Vector3[] flatShadedVertices = new Vector3[triangles.Length];
 		Vector2[] flatShadedUvs = new Vector2[triangles.Length];
+
+		Debug.Log("traingle size = " + triangles.Length);
+		Debug.Log("vertices size = " + vertices.Length);
 
 		for (int i = 0; i < triangles.Length; i++)
         {
@@ -69,7 +72,9 @@ public class MeshData {
 
 		vertices = flatShadedVertices;
 		uvs = flatShadedUvs;
-    }
+
+		Debug.Log("new vertices size = " + vertices.Length);
+	}
 
 	public Mesh CreateMesh() {
 		Mesh mesh = new Mesh();
@@ -84,6 +89,7 @@ public class MeshData {
 		mesh.uv = uvs;
 
 		mesh.RecalculateNormals();
+		mesh.Optimize();
 		return mesh;
 	}
 
