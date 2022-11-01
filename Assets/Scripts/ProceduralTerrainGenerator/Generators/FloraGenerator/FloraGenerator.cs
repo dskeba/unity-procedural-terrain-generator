@@ -50,7 +50,10 @@ public static class FloraGenerator
                         go.transform.parent = meshFilter.transform;
 
                         // Check if randomize scale is on
-                        go.transform.localScale = new Vector3(random.Next(1, 3), random.Next(1, 3), random.Next(1, 3));
+                        if (terrainData.floraRegions[j].randomizeScale)
+                        {
+                            go.transform.localScale = new Vector3(random.Next(1, 3), random.Next(1, 3), random.Next(1, 3));
+                        }
 
                         // Check if randomize material color is on
                         if (terrainData.floraRegions[j].randomizeMaterialColor)
