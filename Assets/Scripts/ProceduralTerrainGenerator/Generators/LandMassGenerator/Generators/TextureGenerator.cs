@@ -15,7 +15,7 @@ public static class TextureGenerator {
 		return texture;
 	}
 
-	public static Texture2D TextureFromHeightMap(float[,] heightMap, TerrainData terrainData) {
+/*	public static Texture2D TextureFromHeightMap(float[,] heightMap, TerrainData terrainData) {
 		int width = heightMap.GetLength(0);
 		int height = heightMap.GetLength(1);
 
@@ -27,6 +27,6 @@ public static class TextureGenerator {
 		}
 
 		return TextureFromColorMap(colorMap, width, height, terrainData);
-	}
+	}*/
 
 }

@@ -26,6 +26,7 @@ public class TerrainData : ScriptableObject
 	public Vector2 offset;
 
 	[Header ("Texture")]
+	public Texture2D texture;
 	public bool enableBlur;
 	public int blurRadius;
 	public int blurIterations;

@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e42ea4ddeba9528428eedbcc3550ab84, type: 3}
-  m_Name: Default
+  m_Name: Nika
   m_EditorClassIdentifier: 
-  chunkSize: 255
-  useFlatShading: 1
-  meshHeightMultiplier: 15
+  chunkSize: 146
+  useFlatShading: 0
+  meshHeightMultiplier: 9.54
   meshHeightCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
-      value: 0
+      time: -30.702763
+      value: -0.8605194
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -28,26 +28,17 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.101337224
-      value: 0.5592464
-      inSlope: 0.9788531
-      outSlope: 0.9788531
+      time: 0.5677252
+      value: 0.05746401
+      inSlope: -0.046016518
+      outSlope: -0.046016518
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.57087946
-      value: 0.058302462
-      inSlope: -0.005992174
-      outSlope: -0.005992174
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1.0705609
-      value: 0.77566874
+      time: 30.433496
+      value: 1.3415481
       inSlope: 0.26796013
       outSlope: 0.26796013
       tangentMode: 0
@@ -57,11 +48,11 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  noiseScale: 23.12
-  octaves: 1
-  persistance: 0.825
-  lacunarity: 2
-  seed: 5
+  noiseScale: 35.7
+  octaves: 6
+  persistance: 0.833
+  lacunarity: 2.99
+  seed: -48
   offset: {x: 0, y: 0}
   enableBlur: 1
   blurRadius: 3
@@ -69,16 +60,16 @@ MonoBehaviour:
   colorRegions:
   - name: 
     height: 0.2
-    color: {r: 0.45490196, g: 0.09803922, b: 0.15263441, a: 0}
-  - name: 
-    height: 0.4
     color: {r: 0, g: 0, b: 0, a: 0}
   - name: 
+    height: 0.4
+    color: {r: 0, g: 1, b: 0.10499716, a: 0}
+  - name: 
     height: 0.6
-    color: {r: 0.6886792, g: 0, b: 0.23164642, a: 0}
+    color: {r: 0.38679248, g: 0.33969775, b: 0.2791474, a: 0}
   - name: 
     height: 1
-    color: {r: 0, g: 0.9528302, b: 0.06221094, a: 0}
+    color: {r: 0, g: 0.035513878, b: 1, a: 0}
   floraSeed: 0
   floraRegions:
   - name: Trees
